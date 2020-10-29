@@ -1,0 +1,224 @@
+%%%%%%%%%%%%%%%%%
+% This is an example CV created using altacv.cls (v1.3, 10 May 2020) written by
+% LianTze Lim (liantze@gmail.com), based on the
+% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
+%
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%%%%%%%%%%%%%%%
+
+%% If you are using \orcid or academicons
+%% icons, make sure you have the academicons
+%% option here, and compile with XeLaTeX
+%% or LuaLaTeX.
+% \documentclass[10pt,a4paper,academicons]{altacv}
+
+%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
+% \documentclass[10pt,a4paper,normalphoto]{altacv}
+
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+
+%% AltaCV uses the fontawesome5 and academicon fonts
+%% and packages.
+%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/academicons for full list of symbols. You MUST compile with XeLaTeX or LuaLaTeX if you want to use academicons.
+
+% Change the page layout if you need to
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
+
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+\ifxetexorluatex
+  % If using xelatex or lualatex:
+  \setmainfont{Lato}
+\else
+  % If using pdflatex:
+  \usepackage[default]{lato}
+\fi
+
+\definecolor{VividPurple}{HTML}{3E0097}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\colorlet{tagline}{VividPurple}
+\colorlet{heading}{VividPurple}
+\colorlet{headingrule}{VividPurple}
+\colorlet{accent}{VividPurple}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Change the bullets for itemize and rating marker
+% for \cvskill if you want to
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+\NewInfoField{bitbucket}{\faBitbucket}[https://bitbucket.org/]
+
+\addbibresource{references.bib}
+
+\begin{document}
+
+\name{Рустам Сайфутдинов}
+\tagline{.NET разработчик}
+\photoR{2.5cm}{logo}
+\personalinfo{
+  \email{rstm.sf@gmail.com}
+  \github{rstm-sf}
+  \bitbucket{rstm-sf}
+}
+
+\makecvheader
+
+%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
+\AtBeginEnvironment{itemize}{\small}
+
+%% Set the left/right column width ratio to 6:4.
+\columnratio{0.6}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+
+\cvsection{Опыт}
+
+\cvsubsection{Работа}
+
+\cvevent{С\# Developer}
+{Актуальные технологии}
+{Январь 2019 -- по н. вр.}
+{Казань, Россия}
+
+\begin{itemize}
+
+\item добавление\,/\,изменение функционала в GUI на Winforms и MVP
+\smallskip
+
+\item исправление ошибок в библиотеках
+\smallskip
+
+\item настройка автосборок для .NET проектов на TeamCity
+\smallskip
+
+\item переписывание миграции, использующая ADO.NET,
+\newline с Postgres~$\rightarrow$~Oracle на Postgres~$\rightarrow$~Apache~Hive
+\smallskip
+
+\item приложение для автономного экспорта данных из Excel в БД по настроенным пользователем сопоставлениям столбцов
+\smallskip
+
+\item автоотчет по шаблону Word из подготовленных данных в БД
+\smallskip
+
+\item обертка над C/C++ библиотекой при помощи P/Invoke
+\smallskip
+
+\item автоматическое определение кодировки файла
+
+\end{itemize}
+
+\divider
+
+\cvevent{Лаборант}
+{Институт компьютерных исследований при НИЧ УГАТУ}
+{Май 2016 -- Август 2017}
+{Уфа, Россия}
+
+\begin{itemize}
+
+\item исследование применимости ГПУ NVIDIA для
+решения СЛАУ с плотной матрицей при гидродинамическом моделировании
+\smallskip
+
+\item исследование влияния нумерации расчетной сетки на
+\newline производительность при гидродинамическом моделировании
+\smallskip
+
+\item исследование влияния использования intel-intrinsics при матрично-векторных операциях в специализированном решателе
+\smallskip
+
+\item профилирование на масштабируемость  MPI-приложения
+\newline гидродинамического моделирования на выч.\,кластере УГАТУ
+
+\end{itemize}
+
+{\color{headingrule}\rule{\linewidth}{1pt}\par}\medskip
+
+\cvsubsection{Саморазвитие}
+
+\smallskip
+
+\begin{itemize}
+
+\item использование кросс-платформенного XAML-фреймворка
+\newline Avalonia UI и MVVM в проектах:
+\href{https://github.com/rstm-sf/RunSQL}{RunSQL} и
+\href{https://github.com/rstm-sf/TrajectoryFinder2D}{TrajectoryFinder2D}
+\smallskip
+
+\item исправление ошибок в проектах:
+\href{https://github.com/AvaloniaUI/avaloniaui.net/commits?author=rstm-sf}{avaloniaui.net},
+\href{https://github.com/AvaloniaUI/Avalonia/commits?author=rstm-sf}{Avalonia} и
+\href{https://github.com/ForNeVeR/wpf-math/commits?author=rstm-sf}{wpf-math}
+\smallskip
+
+\item консолидация использования .NET кодировок в проекте 
+\href{https://github.com/CharsetDetector/UTF-unknown/commits?author=rstm-sf}{UTF-unknown}
+
+\end{itemize}
+
+%% Switch to the right column. This will now automatically move to the second
+%% page if the content is too long.
+\switchcolumn
+
+\cvsection{Навыки}
+
+\cvtag{.NET}
+\cvtag{C\#}
+
+\cvsection{Языки}
+
+\cvskill{Русский}{5}
+\smallskip
+\cvskill{Английский}{1}
+
+\cvsection{Образование}
+
+\cvevent{Магистр по направлению
+\newline \mbox{<<Фундаментальная информатика и}
+\newline \mbox{информационные технологии>>}}
+{ИВМиИТ, К(П)ФУ}
+{2017 -- 2019}
+{Казань, Россия}
+
+\divider
+
+\cvevent{Онлайн-курс <<Machine Learning>>}
+{Stanford University}
+{2018}
+{Coursera}
+
+\divider
+
+\cvevent{Бакалавр по направлению
+\newline \mbox{<<Прикладная математика и}
+\newline \mbox{информатика>>}}
+{Общенаучный факультет, УГАТУ}
+{2012 -- 2017}
+{Уфа, Россия}
+
+\cvsection{Публикации}
+
+\nocite{*}
+
+\printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Труды конференции}},type=inproceedings]
+
+\end{paracol}
+
+\end{document}
