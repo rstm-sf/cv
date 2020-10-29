@@ -1,0 +1,80 @@
+name: Build and release
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - '**/*.{tex,bib,cls}'
+  pull_request:
+    branches: [ main ]
+
+env:
+  zip-name: cv
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build pdf
+      uses: dante-ev/latex-action@master
+      with:
+        root_file: cv.tex
+        args: -file-line-error -halt-on-error -interaction=nonstopmode
+        compiler: latexmk
+
+    - name: Build pdf
+      uses: dante-ev/latex-action@master
+      with:
+        root_file: cv-ru.tex
+        args: -file-line-error -halt-on-error -interaction=nonstopmode
+        compiler: latexmk
+
+    - name: Upload pdf
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.zip-name }}
+        path: |
+          ./cv.pdf
+          ./cv-ru.pdf
+
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: [build]
+    steps:
+
+      # This is a hack for bash-commands and memorize their output
+      - name: Variables
+        id: vars
+        # `echo` in this format will allow you to subsequently reference the results
+        run: |
+          echo "::set-output name=date::$(date +'%Y-%m-%d')"
+          echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.zip-name }}
+
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: cv-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          release_name: Documents (version ${{ steps.vars.outputs.date }})
+          draft: false
+          prerelease: false
+
+      - name: Upload pdf
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./*.pdf
+          tag: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          overwrite: true
+          file_glob: true
