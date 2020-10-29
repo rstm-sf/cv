@@ -3,8 +3,7 @@ name: Build and release
 on:
   push:
     branches: [ main ]
-    paths:
-    - '**/*.{tex,bib,cls}'
+
   pull_request:
     branches: [ main ]
 
