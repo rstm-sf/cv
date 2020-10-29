@@ -3,7 +3,8 @@ name: Build and release
 on:
   push:
     branches: [ main ]
-
+    paths:
+    - 'cv/**'
   pull_request:
     branches: [ main ]
 
@@ -20,6 +21,7 @@ jobs:
     - name: Build pdf
       uses: dante-ev/latex-action@master
       with:
+        working_directory: cv
         root_file: cv.tex
         args: -file-line-error -halt-on-error -interaction=nonstopmode
         compiler: latexmk
@@ -27,6 +29,7 @@ jobs:
     - name: Build pdf
       uses: dante-ev/latex-action@master
       with:
+        working_directory: cv
         root_file: cv-ru.tex
         args: -file-line-error -halt-on-error -interaction=nonstopmode
         compiler: latexmk
@@ -36,12 +39,12 @@ jobs:
       with:
         name: ${{ env.zip-name }}
         path: |
-          ./cv.pdf
-          ./cv-ru.pdf
+          cv/cv.pdf
+          cv/cv-ru.pdf
 
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     needs: [build]
     steps:
 
