@@ -77,6 +77,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./*.pdf
-          tag: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          tag: cv-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
           overwrite: true
           file_glob: true
