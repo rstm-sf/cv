@@ -19,28 +19,22 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build pdf
-      uses: dante-ev/latex-action@master
+      uses: xu-cheng/latex-action@v2
       with:
         working_directory: cv
-        root_file: cv.tex
-        args: -file-line-error -halt-on-error -interaction=nonstopmode
-        compiler: latexmk
-
-    - name: Build pdf
-      uses: dante-ev/latex-action@master
-      with:
-        working_directory: cv
-        root_file: cv-ru.tex
-        args: -file-line-error -halt-on-error -interaction=nonstopmode
-        compiler: latexmk
+        root_file: |
+          cv.tex
+          cv-ru.tex
+        latexmk_use_lualatex: true
 
     - name: Upload pdf
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.zip-name }}
+        working_directory: cv
         path: |
-          cv/cv.pdf
-          cv/cv-ru.pdf
+          cv.pdf
+          cv-ru.pdf
 
   release:
     runs-on: ubuntu-latest
