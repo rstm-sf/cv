@@ -31,10 +31,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.zip-name }}
-        working_directory: cv
         path: |
-          cv.pdf
-          cv-ru.pdf
+          cv/cv.pdf
+          cv/cv-ru.pdf
 
   release:
     runs-on: ubuntu-latest
