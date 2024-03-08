@@ -16,23 +16,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Build pdf
-      uses: xu-cheng/latex-action@v2
+      uses: xu-cheng/latex-action@v3
       with:
         working_directory: cv
         root_file: |
-          cv.tex
           cv-ru.tex
         latexmk_use_lualatex: true
 
     - name: Upload pdf
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ env.zip-name }}
         path: |
-          cv/cv.pdf
           cv/cv-ru.pdf
 
   release:
@@ -50,12 +48,12 @@ jobs:
           echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
 
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: ${{ env.zip-name }}
 
       - name: Create release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
