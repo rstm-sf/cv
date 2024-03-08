@@ -1,38 +1,36 @@
-%%%%%%%%%%%%%%%%%
-% This is an example CV created using altacv.cls (v1.3, 10 May 2020) written by
-% LianTze Lim (liantze@gmail.com), based on the
-% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
-%
-%% It may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%    http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2003/12/01 or later.
-%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt]{article}
 
-%% If you are using \orcid or academicons
-%% icons, make sure you have the academicons
-%% option here, and compile with XeLaTeX
-%% or LuaLaTeX.
-% \documentclass[10pt,a4paper,academicons]{altacv}
+\usepackage[margin=2cm]{geometry}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
 
-%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
-% \documentclass[10pt,a4paper,normalphoto]{altacv}
 
-\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
 
-%% AltaCV uses the fontawesome5 and academicon fonts
-%% and packages.
-%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/academicons for full list of symbols. You MUST compile with XeLaTeX or LuaLaTeX if you want to use academicons.
-
-% Change the page layout if you need to
-\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
-
-% The paracol package lets you typeset columns of text in parallel
-\usepackage{paracol}
-
+\ifxetexorluatex
+  \usepackage{fontspec}
+\else
+    \usepackage[english,russian]{babel}
+    \usepackage{cmap}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \input{glyphtounicode}
+\fi
 
 % Change the font if you want to, depending on whether
 % you're using pdflatex or xelatex/lualatex
@@ -44,199 +42,193 @@
   \usepackage[default]{lato}
 \fi
 
-\definecolor{VividPurple}{HTML}{3E0097}
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
-\colorlet{tagline}{VividPurple}
-\colorlet{heading}{VividPurple}
-\colorlet{headingrule}{VividPurple}
-\colorlet{accent}{VividPurple}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
 
-% Change the bullets for itemize and rating marker
-% for \cvskill if you want to
-\renewcommand{\itemmarker}{{\small\textbullet}}
-\renewcommand{\ratingmarker}{\faCircle}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
-\NewInfoField{bitbucket}{\faBitbucket}[https://bitbucket.org/]
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
 
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\footskip}{4.08003pt}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\ifxetexorluatex
+\else
+  % Ensure that generate pdf is machine readable/ATS parsable
+  \pdfgentounicode=1
+\fi
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textit{\small#1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & #2 \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{-3pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\newcommand{\resumeSkillListStart}{\begin{itemize}[leftmargin=0.20in, label={}]}
+\newcommand{\resumeSkillListEnd}{\end{itemize}\vspace{-3pt}}
+
+\newcommand{\resumeSkillItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2}\vspace{-6pt}
+  }
+}
+
+
+\usepackage[backend=biber,style=authoryear,sorting=ydnt]{biblatex}
 \addbibresource{references.bib}
+\defbibheading{pubtype}{\hspace{18pt}\vspace{-2pt}{\bfseries{#1}}\medskip}
+\renewcommand{\bibsetup}{\vspace{-6pt}}
+\renewcommand*{\bibfont}{\small}
+\AtEveryCitekey{item[]}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{document}
 
-\name{Рустам Сайфутдинов}
-\tagline{.NET разработчик}
-\photoR{2.5cm}{logo}
-\personalinfo{
-  \email{rstm.sf@gmail.com}
-  \github{rstm-sf}
-  \bitbucket{rstm-sf}
-}
 
-\makecvheader
+\begin{center}
+  \textbf{\Huge \scshape Рустам Сайфутдинов} \\ \vspace{1pt}
+  \small
+  \href{mailto:rstm.sf@gmail.com}{\underline{rstm.sf@gmail.com}} $|$
+  \href{https://github.com/rstm-sf}{\underline{github.com/rstm-sf}}
+\end{center}
 
-%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
-\AtBeginEnvironment{itemize}{\small}
 
-%% Set the left/right column width ratio to 6:4.
-\columnratio{0.6}
+%-----------EXPERIENCE-----------
+\section{Опыт}
+  \resumeSubHeadingListStart
 
-% Start a 2-column paracol. Both the left and right columns will automatically
-% break across pages if things get too long.
-\begin{paracol}{2}
+    \resumeSubheading
+      {Backend .NET Developer}{Окт. 2021 -- По наст. вр.}
+      {CraftTalk}{}
+      \resumeItemListStart
+        \resumeItem{Участие в разрабатывании программного обеспечения для контакт центров}
+        \resumeItem{Расширение настроек обработки обращений, функциональности базы знаний и вебчата}
+        \resumeItem{Разрабатывание API для рабочего места оператора и супервизора, настроек проекта и прокси для внутренних сервис-агентов}
+      \resumeItemListEnd
 
-\cvsection{Опыт}
+    \resumeSubheading
+      {Full Stack .NET Developer}{Июнь 2021 -- Сент. 2021}
+      {Junior Projects}{}
+      \resumeItemListStart
+        \resumeItem{Участие в разрабатывании программного обеспечения для сферы образования}
+        \resumeItem{Расширение функциональности интерфейса для администрирования}
+        \resumeItem{Разрабатывание интеграций с внешними сервисами и автоматизация формирования отчетов}
+      \resumeItemListEnd
 
-\cvevent{Backend .NET Developer}
-{CraftTalk}
-{Октябрь 2021 -- По наст. вр.}
-{Дистанционно}
+    \resumeSubheading
+      {С\# Developer}{Янв. 2019 -- Март 2021}
+      {Актуальные технологии}{Казань, Россия}
+      \resumeItemListStart
+        \resumeItem{Участие в разрабатывании программного обеспечения для геолого-промыслового анализа и планирования геолого-технических мероприятий}
+        \resumeItem{Расширение функциональности интерфейса для пользователей}
+        \resumeItem{Разрабатывание автоматизации формирования отчетов, интеграции с Apache~Hive, оберток c++ библиотек для .NET}
+      \resumeItemListEnd
 
-Разработка программного обеспечения для контакт центров:
+    \resumeSubheading{Инженер}{Май 2016 -- Авг. 2017}{Институт компьютерных исследований при НИЧ УГАТУ}{Уфа, Россия}
+      \resumeSubSubheading
+       {Инженер}{Июль 2016 -- Авг. 2017}
+       \resumeItemListStart
+         \resumeItem{Исследование применимости ГПУ NVIDIA для решения СЛАУ с плотной матрицей при моделировании}
+       \resumeItemListEnd
+      \resumeSubSubheading
+       {Лаборант}{Май 2016 -- Июнь 2017}
+       \resumeItemListStart
+         \resumeItem{Исследование и профилирование программных обеспечений: влияние нумерации расчетной сетки на производительность, влияние использования intel-intrinsics при матрично-векторных операциях, масштабируемость MPI-приложения гидродинамического моделирования}
+       \resumeItemListEnd
 
-\begin{itemize}
+  \resumeSubHeadingListEnd
 
-  \item Web API;
-  \smallskip
 
-  \item расширение возможностей платформы;
-  \smallskip
+%-----------PROJECTS-----------
+\section{Проекты}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{view-avalonia-preview-vscode} $|$ \emph{.NET, TypeScript, HTML}}{Февр. 2021 -- Май 2021}
+          \resumeItemListStart
+            \resumeItem{Разрабатывание интеграции превьювера в VS Code}
+            \resumeItem{Разрабатывание MSBuild-таски получения настроек .NET проекта на Avalonia для дальнейшего передачи параметров запуска превьювера}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
 
-  \item небольшая правка фронтенда под изменения.
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Навыки}
+  \resumeSkillListStart
+    \resumeSkillItem{Языки программирования}{C\#, F\#, C/C++, Python, JavaScript, TypeScript, PowerShell, Lua, Go, Kotlin, Java, TeX}
+    \resumeSkillItem{Фреймворки}{ASP.NET Core, Razor Pages, AngularJs, React, Winforms, Avalonia}
+    \resumeSkillItem{Базы данных и брокеры}{Redis, Elasticsearch, Postgres, SQLite, RabbitMQ, Keycloak}
+    \resumeSkillItem{Инструменты}{Git, Docker, IntelliJ, VS Code, DataGrip, DBeaver, Grafana, Loki, Prometheus, New Relic, Github Actions, Gitlab Pipelines, TeamCity, YouTrack, Jira, Insomnia, Visual Studio}
+  \resumeSkillListEnd
 
-\end{itemize}
 
-\divider
+%-----------EDUCATION-----------
+\section{Образование}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {ИВМиИТ, К(П)ФУ}{Казань, Россия}
+      {Магистр по направлению <<Фундаментальная информатика и информационные технологии>> }{2017 -- 2019}
+    \resumeSubheading
+      {ОНФ, УГАТУ}{Уфа, Россия}
+      {Бакалавр по направлению <<Прикладная математика и информатика>>}{2012 -- 2017}
+  \resumeSubHeadingListEnd
 
-\cvevent{Full Stack .NET Developer}
-{Junior Projects}
-{Июнь 2021 -- Сентябрь 2021}
-{Дистанционно}
-
-Разработка программного обеспечения для сферы образования:
-
-\begin{itemize}
-
-  \item интерфейс для пользователей;
-  \smallskip
-
-  \item автоматизация отчетов;
-  \smallskip
-
-  \item интеграция с различными сервисами.
-
-\end{itemize}
-
-\divider
-
-\cvevent{С\# Developer}
-{Актуальные технологии}
-{Январь 2019 -- Март 2021}
-{Казань, Россия}
-
-Разработка программного обеспечения для геолого-промыслового анализа и планирования геолого-технических мероприятий:
-
-\begin{itemize}
-
-  \item интерфейс для пользователей;
-  \smallskip
-
-  \item автоматизация отчетов;
-  \smallskip
-
-  \item интеграция приложения с Apache~Hive;
-  \smallskip
-
-  \item написание оберток c++ библиотек для .NET;
-  \smallskip
-
-  \item настройка автосборки проектов.
-
-\end{itemize}
-
-\divider
-
-\cvevent{Инженер}
-{Институт компьютерных исследований при НИЧ УГАТУ}
-{Июль 2016 -- Август 2017}
-{Уфа, Россия}
-
-Исследование применимости ГПУ NVIDIA для решения СЛАУ с плотной матрицей при моделировании.
-
-\divider
-
-\cvevent{Лаборант}
-{Институт компьютерных исследований при НИЧ УГАТУ}
-{Май 2016 -- Июнь 2017}
-{Уфа, Россия}
-
-Исследование и профилирование программных обеспечений:
-
-\begin{itemize}
-
-  \item влияние нумерации расчетной сетки на производительность при моделировании;
-  \smallskip
-
-  \item влияния использования intel-intrinsics при матрично-векторных операциях;
-  \smallskip
-
-  \item масштабируемость MPI-приложения гидродинамического моделирования.
-
-\end{itemize}
-
-%% Switch to the right column. This will now automatically move to the second
-%% page if the content is too long.
-\switchcolumn
-
-\cvsection{Навыки}
-
-\cvtag{.NET}
-\cvtag{ASP.NET Core}
-\cvtag{Razor Pages}
-\cvtag{Winforms}
-\cvtag{C\#}
-\cvtag{F\#}
-\cvtag{C/C++}
-\cvtag{JS/TS}
-
-\cvsection{Языки}
-
-\cvskill{Русский}{5}
-\smallskip
-\cvskill{Английский}{1}
-
-\cvsection{Образование}
-
-\cvevent{Магистр по направлению
-\newline \mbox{<<Фундаментальная информатика и}
-\newline \mbox{информационные технологии>>}}
-{ИВМиИТ, К(П)ФУ}
-{2017 -- 2019}
-{Казань, Россия}
-
-\divider
-
-\cvevent{Онлайн-курс <<Machine Learning>>}
-{Stanford University}
-{2018}
-{Coursera}
-
-\divider
-
-\cvevent{Бакалавр по направлению
-\newline \mbox{<<Прикладная математика и}
-\newline \mbox{информатика>>}}
-{Общенаучный факультет, УГАТУ}
-{2012 -- 2017}
-{Уфа, Россия}
-
-\cvsection{Публикации}
-
+%
+%-----------PUBLICATIONS-----------
+\section{Публикации}
 \nocite{*}
+\printbibliography[heading=pubtype,title={Труды конференции},type=inproceedings]
 
-\printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Труды конференции}},type=inproceedings]
 
-\end{paracol}
-
+%-------------------------------------------
 \end{document}
